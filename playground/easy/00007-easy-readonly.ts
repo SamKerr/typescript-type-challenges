@@ -31,10 +31,13 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyReadonly<T> = any
+type MyReadonly<T extends {}> = {
+  readonly [K in keyof T]: T[K];
+}
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
+import { toSolutionsFull } from 'scripts/toUrl'
 
 type cases = [
   Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>,
@@ -55,3 +58,10 @@ interface Todo1 {
   > View solutions: https://tsch.js.org/7/solutions
   > More Challenges: https://tsch.js.org
 */
+
+// Other toSolutions
+
+// your answers
+// type MyReadonly<T> = {
+//   readonly [P in keyof T]: T[P];
+// };
